@@ -14,7 +14,7 @@
 		accessing 2d vectors using auto 
 ```c++ 
 	    for(auto v : b) { 
-        for(int i : v) {
+       		for(int i : v) {
 		}
 		}
 ```
