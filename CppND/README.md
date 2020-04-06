@@ -14,7 +14,7 @@
 
         while loop reads the file line by line into a string until file stream ends 
         
-        ```C++
+```C++
         
             ifstream myFile; 
             myFile.open("Files/1.board");
@@ -27,4 +27,4 @@
                     cout <<line<<endl; 
                 }
                 
-    ```
+```
