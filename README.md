@@ -1,7 +1,7 @@
 # Cpp_language
 ## Learning C++ Programming 
 
-`This Repo is for educational perpose For myself and for Whoever is interrested in learning C++`
+`This Repo is for educational purpose For myself and for Whoever is interrested in learning C++`
 
 ## `My Resources are : `
 
