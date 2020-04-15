@@ -1,12 +1,15 @@
-# Learning C++ Programming 
+# Cpp_language
+## Learning C++ Programming 
 
-My Resources are
+`This Repo is for educational perpose For myself and for Whoever is interrested in learning C++`
 
-	- programming_principles_and_practice_using_c_2nd_ed `Book`
+## `My Resources are : `
+
+- programming_principles_and_practice_using_c_2nd_ed `Book`
 	 
-	- Udacity C++ nano Degree `CppND`
+- Udacity C++ nano Degree `CppND`
 	
-	- concepts from my online search `Basic_Concepts`
+- concepts from my online search `Basic_Concepts`
 	
 	
 	
