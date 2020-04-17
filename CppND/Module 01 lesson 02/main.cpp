@@ -11,6 +11,7 @@ enum class state{kEmpty,kObstacle};
 vector<state> ParseLine(string Line);
 vector<vector<state>> ReadBoardFile(string path);
 void PrintBoard(const vector<vector<state>> board);
+string CellString(state cell);
 
 int main()
 {
