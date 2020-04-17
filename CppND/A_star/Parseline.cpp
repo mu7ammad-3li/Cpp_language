@@ -9,6 +9,7 @@ using namespace std;
 vector<int> ParseLine(string Line);
 ifstream boardFile;
 vector<vector<int>> boardVector;
+void printBoard(vector<vector<int>> VboardVector);
 
 int main()
 {
@@ -25,16 +26,7 @@ int main()
         temp = ParseLine(Line);
         boardVector.push_back(temp);
     }
-    /* test result 
-    for (int i = 0; i < boardVector.size(); i++)
-    {
-        for (int j = 0; j < boardVector[i].size(); j++)
-        {
-            cout << boardVector[i][j] << " ";
-        }
-        cout << endl;
-    }
-    */
+    printBoard(boardVector);
     
 }
 
@@ -52,4 +44,16 @@ vector<int> ParseLine(string Line)
         pTemp.push_back(n); //push the values into temp vector
     }
     return pTemp; 
+}
+void printBoard(vector<vector<int>> VboardVector)
+{
+    for (int i = 0; i < VboardVector.size(); i++)
+    {
+        for (int j = 0; j < VboardVector[i].size(); j++)
+        {
+            cout << VboardVector[i][j] << " ";
+        }
+        cout << endl;
+    }
+    
 }
