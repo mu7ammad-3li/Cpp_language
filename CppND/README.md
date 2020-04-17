@@ -94,3 +94,7 @@ File Stream was created
 0 0 0 0 1 0 
 0 1 1 0 0 1 
 ```
+
+#### `Parseline.cpp`
+
+Implemented a parseline function that accepts string in the form of `int ,char`  as an argument and returned a vector containing the intgers in that string 
