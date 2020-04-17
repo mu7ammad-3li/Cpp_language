@@ -98,3 +98,16 @@ File Stream was created
 #### `Parseline.cpp`
 
 Implemented a parseline function that accepts string in the form of `int ,char`  as an argument and returned a vector containing the intgers in that string 
+
+## End of module 
+Gathering all files into `main.cpp`
+
+created a num class state having two states `kEmpty,kObstacle`
+
+`ReadBoardFile` function that reads  the file lines and returs a 2 D vector of states 
+
+`ParseLine` reads a single line and return a vector of states is called withen `ReadBoardFile` function 
+
+`CellString` assign emoji to the state of the class `state`
+`PrintBoard` print the vector to the console 
+
