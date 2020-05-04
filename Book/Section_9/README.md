@@ -233,7 +233,7 @@ Month mm = Month(7);    // convert int to Month (unchecked)
 Obviously, “plain” enums are less strict than enum classes. Their enumerators can “pollute” the
 scope in which their enumerator is defined. That can be a convenience, but it occasionally leads to
 surprises. For example, if you try to use this Month together with the iostream formatting
-mechanisms (§11.2.1), you will find that dec for December clashes with dec for decimal.
+mechanisms , you will find that dec for December clashes with dec for decimal.
 
 Similarly, having an enumeration value convert to int can be a convenience (it saves us from being
 explicit when we want a conversion to int), but occasionally it leads to surprises. For example:
