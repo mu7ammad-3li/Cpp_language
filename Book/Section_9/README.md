@@ -251,8 +251,21 @@ with undesirable results.
 Prefer the simpler and safer enum classes to “plain” enums, but expect to find “plain” enums in
 older code: enum classes are new in C++11.
 
-`calling it for tonight `
+### OPERATOR OVERLOADING 
 
+We use operator overloading to provide a coventional notation for our designed type 
+```c++
+enum class month 
+{
+    jan = 1 ,feb,mar,...,dec
+}; 
+month operator++(month&m)
+{
+    m=(m==dec)?jan : month (int(m)+1); // if m = dec m= jan else m = m+1 
+    return m ; 
+}
+month m= feb ; 
+++m ; //m becomes mar
 
 
 
