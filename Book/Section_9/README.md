@@ -266,9 +266,19 @@ month operator++(month&m)
 }
 month m= feb ; 
 ++m ; //m becomes mar
+```
 
+### CLASS INTERFACE 
 
+-   `General Rules`
+-       keep interface complete 
+-       keep interface minimal 
+-       provide constructors 
+-       support/prohibte copying 
+-       use types to provide good argument checking 
+-       idenfy nonmodifing member functions 
+-       free all resources in the constructor 
 
+#### ARGUMENT TYPES 
 
-
-
+    
