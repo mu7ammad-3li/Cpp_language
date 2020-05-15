@@ -22,6 +22,7 @@ public:
     void askForDay(/*int &_day, int &_month, int &_year*/);
     string findDay();
     void printDay(/*int _day, int _month, int _year*/);
+    void printMonth(int _month ,)
 
 private:
     int day;
