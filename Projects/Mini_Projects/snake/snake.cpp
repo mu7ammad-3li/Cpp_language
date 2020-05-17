@@ -125,25 +125,25 @@ void Draw ()
 void Input()
 {
 
-        char c = getche();
+        char c = getch();
         
-        switch (getche())
+        switch (getch())
         {
         case 'w':
             dir = Up;
-            prevC=c;
+            
             break;
         case 's':
             dir = Down;
-            prevC=c;
+            
             break;
         case 'd':
             dir = Right;
-            prevC=c;
+            
             break;
         case 'a':
             dir = Left;
-            prevC=c;
+            
             break;
         case 'q':
             gameOver = true;
