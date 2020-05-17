@@ -1,7 +1,8 @@
 #include<iostream> 
 //#include<ncurses.h>
 #include <termios.h>
-
+#include <stdio.h>
+#include <sys/ioctl.h>
 
 
 using namespace std ;
@@ -10,6 +11,8 @@ bool gameOver;
 const int Width =40; 
 const int Hight =20; 
 int xCord ,yCord ,fruitX ,fruitY, Score; 
+int tailX[100], tailY[100];
+int nTail;
 static struct termios _old ;
 static struct termios _new;
 /* Initialize new terminal i/o settings */
@@ -57,6 +60,7 @@ char getche(void)
 }
 
 
+
 enum Direction { Stop =0, Left , Right, Up, Down }; 
 Direction dir ; 
 
@@ -68,7 +72,7 @@ void Setup ()
     yCord = Hight/2; 
     fruitX = rand() % Width; 
     fruitY = rand() % Hight; 
-    Score = 0 ;
+    Score = 0;
 }
 void Draw ()
 { 
@@ -88,48 +92,84 @@ void Draw ()
         }
         else
         {
-            for (int j=0; j<Width; j++)
+            for (int j = 0; j < Width; j++)
             {
-                if (j==0||j==Width-1)
-                    cout <<"*"; 
-                else if (i == yCord && j==xCord )
-                    cout <<"O"; 
-                else if (i==fruitY && j== fruitX)
+                if (j == 0 || j == Width - 1)
+                    cout << "*";
+                else if (i == yCord && j == xCord)
+                    cout << "O";
+                else if (i == fruitY && j == fruitX)
                 {
-                cout <<"🍏"; 
-                j++;
+                    cout << "🍏";
+                    j++;
                 }
-                else 
-                    cout << " "; 
+                else
+                {
+                    bool print = false;
+                    for (int k = 0; k < nTail; k++)
+                    {
+                        if (tailX[k] == j && tailY[k] == i)
+                        {
+                            cout << "o";
+                            print = true;
+                        }
+                    }
+                    if (!print)
+                        cout << " ";
+                }
             }
             cout << endl;
         }
-        
-
     }
-
 }
 void Input()
 {
-    char c = getch();
-switch(c) {
-case 'w':
-    dir =Up; 
-    break;
-case 's':
-    dir =Down;
-    break;
-case 'd':
-    dir =Right;
-    break;
-case 'a':
-    dir =Left;
-    break;
-}
+
+        char c = getche();
+        
+        switch (getche())
+        {
+        case 'w':
+            dir = Up;
+            prevC=c;
+            break;
+        case 's':
+            dir = Down;
+            prevC=c;
+            break;
+        case 'd':
+            dir = Right;
+            prevC=c;
+            break;
+        case 'a':
+            dir = Left;
+            prevC=c;
+            break;
+        case 'q':
+            gameOver = true;
+            cout << "\nGame Terminated\n"
+                 << endl;
+            break;
+
+        }
 
 }
 void Logic ()
-{
+{   
+    int prevX = tailX[0];
+    int prevY = tailY[0];
+    int prev2X, prev2Y;
+    tailX[0] = xCord;
+    tailY[0] = yCord;
+    for (int i = 1; i < nTail; i++)
+    {
+        prev2X = tailX[i];
+        prev2Y = tailY[i];
+        tailX[i] = prevX;
+        tailY[i] = prevY;
+        prevX = prev2X;
+        prevY = prev2Y;
+    }
     switch (dir)
     {
     case Left:
@@ -144,15 +184,30 @@ void Logic ()
     case Down:
         yCord++;
         break;
+    }
     if (xCord==fruitX && yCord== fruitY)
     {
-        fruitX = rand() % Width; 
-        fruitY = rand() % Hight;
-        Score++;         
+        Score +=10; 
+        fruitX = rand() % 40; 
+        fruitY = rand() % 20;
+        nTail++;
+    }
+    for (int i = 0; i < nTail; i++)
+        if (tailX[i] == xCord && tailY[i] == yCord)
+        {
+            gameOver = true;
+            cout << "\nGame Over\n"<< endl;
+        }
+                            
+    
+    if (xCord <= 0 || xCord > Width-2 || yCord <=   0 ||yCord > Hight-2)
+    {
+        gameOver=true;
+        cout << "\nGame Over\n"<< endl; 
     }
 
 
-    }
+    
 }
 
 
