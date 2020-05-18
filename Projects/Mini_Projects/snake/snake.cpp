@@ -1,9 +1,7 @@
 #include<iostream> 
-//#include<ncurses.h>
-#include <termios.h>
-#include <stdio.h>
-#include <sys/ioctl.h>
-
+#include <stdlib.h>     
+#include <time.h>  
+#include"conio.h"
 
 using namespace std ;
 
@@ -13,53 +11,6 @@ const int Hight =20;
 int xCord ,yCord ,fruitX ,fruitY, Score; 
 int tailX[100], tailY[100];
 int nTail;
-static struct termios _old ;
-static struct termios _new;
-/* Initialize new terminal i/o settings */
-void initTermios(int echo) 
-{
-  tcgetattr(0, &_old); //grab old terminal i/o settings
-  _new = _old; //make new settings same as old settings
-  _new.c_lflag &= ~ICANON; //disable buffered i/o
-  _new.c_lflag &= echo ? ECHO : ~ECHO; //set echo mode
-  tcsetattr(0, TCSANOW, &_new); //apply terminal io settings
-}
- 
-/* Restore old terminal i/o settings */
-void resetTermios(void) 
-{
-  tcsetattr(0, TCSANOW, &_old);
-}
- 
-/* Read 1 character - echo defines echo mode */
-char getch_(int echo) 
-{
-  char ch;
-  initTermios(echo);
-  ch = getchar();
-  resetTermios();
-  return ch;
-}
- 
-/* 
-Read 1 character without echo 
-getch() function definition.
-*/
-char getch(void) 
-{
-  return getch_(0);
-}
- 
-/* 
-Read 1 character with echo 
-getche() function definition.
-*/
-char getche(void) 
-{
-  return getch_(1);
-}
-
-
 
 enum Direction { Stop =0, Left , Right, Up, Down }; 
 Direction dir ; 
@@ -70,8 +21,9 @@ void Setup ()
     dir = Stop; 
     xCord = Width/2; 
     yCord = Hight/2; 
-    fruitX = rand() % Width; 
-    fruitY = rand() % Hight; 
+    srand (time(NULL));
+    fruitX = rand() % 38+1; 
+    fruitY = rand() % 19+1; 
     Score = 0;
 }
 void Draw ()
@@ -125,34 +77,32 @@ void Draw ()
 void Input()
 {
 
-        char c = getch();
-        
-        switch (getch())
-        {
-        case 'w':
-            dir = Up;
-            
-            break;
-        case 's':
-            dir = Down;
-            
-            break;
-        case 'd':
-            dir = Right;
-            
-            break;
-        case 'a':
-            dir = Left;
-            
-            break;
-        case 'q':
-            gameOver = true;
-            cout << "\nGame Terminated\n"
-                 << endl;
-            break;
+    char c = getch();
+    switch (c)
+    {
+    case 'w':
+        dir = Up;
 
-        }
+        break;
+    case 's':
+        dir = Down;
 
+        break;
+    case 'd':
+        dir = Right;
+
+        break;
+    case 'a':
+        dir = Left;
+
+        break;
+    case 'q':
+        gameOver = true;
+        cout << "\nGame Terminated\n"
+             << endl;
+        break;
+    }
+    
 }
 void Logic ()
 {   
@@ -188,22 +138,22 @@ void Logic ()
     if (xCord==fruitX && yCord== fruitY)
     {
         Score +=10; 
-        fruitX = rand() % 40; 
-        fruitY = rand() % 20;
+        fruitX = rand() % 38+1; 
+        fruitY = rand() % 18+1; 
         nTail++;
     }
     for (int i = 0; i < nTail; i++)
         if (tailX[i] == xCord && tailY[i] == yCord)
         {
             gameOver = true;
-            cout << "\nGame Over\n"<< endl;
+            cout << "\nGame Over tail\n"<< endl;
         }
                             
     
     if (xCord <= 0 || xCord > Width-2 || yCord <=   0 ||yCord > Hight-2)
     {
         gameOver=true;
-        cout << "\nGame Over\n"<< endl; 
+        cout << "\nGame Over wall\n"<< endl; 
     }
 
 
@@ -216,13 +166,23 @@ void Logic ()
 
 int main ()
 {
+    
     Setup(); 
+    Draw();
     while (!gameOver)
     { 
         
-        Draw(); 
+        
         Input(); 
-        Logic(); 
+        while (!_kbhit())
+        {   
+            Draw(); 
+            Logic(); 
+            fflush(stdout);
+            usleep(200000);
+        }
+        
+        
     }
     
 return 0 ; 
