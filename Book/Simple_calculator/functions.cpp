@@ -1,5 +1,6 @@
 #include<iostream>
 #include <string>
+#include<cmath>
 #include"functions.h"
 #include "token.h"
 #include "token_stream.h"
@@ -53,6 +54,14 @@ double term(){
 		}
 		case '!':
 			return fac(left);
+		case '%':{
+			double d =primary(); 
+			if (d==0)
+				error("can not devide by 0 "); 
+			left = fmod(left,d); 
+			t=ts.get(); 
+			break; 
+		}
 		default:
 			ts.put_back(t);
 			return left;

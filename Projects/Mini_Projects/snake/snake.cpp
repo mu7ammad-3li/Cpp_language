@@ -22,7 +22,7 @@ void Setup ()
     xCord = Width/2; 
     yCord = Hight/2; 
     srand (time(NULL));
-    fruitX = rand() % 38+1; 
+    fruitX = rand() % 37+1; 
     fruitY = rand() % 19+1; 
     Score = 0;
 }

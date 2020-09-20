@@ -3,14 +3,21 @@
 #include<string> 
 #include "Calendar.h"
 
+using namespace std ; 
+//
+month operator++(month &m)
+{
+    m = (m == month::December) ? month::January : month(int(m) + 1); // if m = dec m= jan else m = m+1
+    return m;
+}
 
-Calendar::Calendar() : month{5}, year{2020} {};
+Calendar::Calendar() : _month{month(1)}, year{2020} {};
 
 void Calendar::setFirstDay(){
 
 	int day=1;
-	int y = year - (14-month)/12;
-	int m = month +12 * ((14-month) / 12) -2;
+	int y = year - (14-int(_month))/12;
+	int m = int(_month) +12 * ((14-int(_month)) / 12) -2;
 	firstDay= (day + y + y / 4 - y / 100 + y / 400 + (31 * m / 12)) % 7;
 };
 
@@ -20,7 +27,7 @@ void Calendar::Print()
     int firstDayOfMonth = 0;
     int daysInWeekCounter = 0;
     int dateCounter = 1;
-    switch (month)
+    switch (int(_month))
     {
     case 1:
         cout << setw(20) << "January " << year;

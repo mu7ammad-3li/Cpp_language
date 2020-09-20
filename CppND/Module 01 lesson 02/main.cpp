@@ -40,7 +40,7 @@ vector<state> ParseLine(string Line)
     {
         if (n==0)
             Row.push_back(state::kEmpty);
-        else
+         else
             Row.push_back(state::kObstacle);
     }
     return Row; 
